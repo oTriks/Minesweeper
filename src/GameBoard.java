@@ -1,5 +1,5 @@
 public class GameBoard {
-    private final char[][] board;
+    private char[][] board;
     public String boardLayout;
 
     public GameBoard() {
@@ -9,17 +9,19 @@ public class GameBoard {
                 board[i][j] = ' ';
             }
         }
+        updateBoardLayout();
+        System.out.println(boardLayout);
     }
 
     public void updateBoardLayout() {
-        boardLayout = "\n            A    B    C    D    E    F    G    H    I\n";
-        boardLayout += "          ____ ____ ____ ____ ____ ____ ____ ____ ____ \n";
+        boardLayout = "\n            A     B     C     D     E     F     G     H     I\n";
+        boardLayout += "         +-----+-----+-----+-----+-----+-----+-----+-----+-----+ \n";
         for (int i = 0; i < 9; i++) {
             boardLayout += "       " + (i + 1) + " |";
             for (int j = 0; j < 9; j++) {
-                boardLayout += "  " + board[i][j] + " |";
+                boardLayout += "  " + board[i][j] + "  |";
             }
-            boardLayout += "\n         |____|____|____|____|____|____|____|____|____|\n";
+            boardLayout += "\n         +-----+-----+-----+-----+-----+-----+-----+-----+-----+\n";
         }
     }
 
@@ -33,6 +35,7 @@ public class GameBoard {
 
     public void setCell(int row, int col,char value) {
         board[row][col] = value;
+        updateBoardLayout();
     }
 
     public char[][] getBoard() {

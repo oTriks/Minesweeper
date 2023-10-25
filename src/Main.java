@@ -4,7 +4,5 @@ public class Main {
         System.out.println("Välkommen till spelet!");
         Game game = new Game();
 
-
-
     }
 }

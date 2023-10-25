@@ -1,6 +1,7 @@
 public class Game {
 
     GameBoard gameBoard = new GameBoard();
+    Mines mines = new Mines(gameBoard);
 
 
     //                         timer funktion
@@ -11,12 +12,17 @@ public class Game {
 
 
     public Game() {
-        gameBoard.updateBoardLayout();
 
-        System.out.println(gameBoard.getBoardLayout());
+        //TODO: ************ TA BORT INNAN PUSH!!!! ****************
+        gameBoard.setCell(3, 3, 'Ä');
+        if(!mines.isMine(3, 3)){
+            System.out.println("hejhjehje");
+        }
+        mines.showAllMines();
+        //TODO: ***********************************
 
-        Mines mines = new Mines();
         makeMove("a1", mines);
+
     }
 
 
