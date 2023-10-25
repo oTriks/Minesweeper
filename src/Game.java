@@ -1,10 +1,11 @@
 public class Game {
 
     GameBoard gameBoard = new GameBoard();
-
+    Mines mines = new Mines();
 
     //                         timer funktion
     // long start = System.currentTimeMillis(); // anropa programmets start
+
     // long stop = System.currentTimeMillis(); // anropa programmets slut
     //   long totalTime = stop - start;
     //  System.out.println("Time: " + totalTime + " s");
@@ -15,28 +16,30 @@ public class Game {
 
         System.out.println(gameBoard.getBoardLayout());
 
-        Mines mines = new Mines();
-        makeMove("a1", mines);
+
+
+        makeMove("a1", mines);  // just a test
     }
 
 
 
     public void makeMove(String choice, Mines mine) {
 
-        char row = choice.charAt(0);
-        int rowNumber = Character.toUpperCase(row) - 65;
-        int column = Integer.parseInt(choice.substring(1, 2)) -1;
-        mine.isMine(rowNumber, column);
-        checkWin(mine);
-         // if valid choice etc ....
-        // valid choice?
-        // anrop siffra avstånd till mina
+        char rowNumber = choice.charAt(0);
+        int row = Character.toUpperCase(rowNumber) - 65;
+        int col = Integer.parseInt(choice.substring(1, 2)) -1;
+     //    mine.isMine(row, col);
+        GameBoard solutionBoard = mines.getSolutionBoard();
+        char chosenCell = solutionBoard.getCell(row, col);
+        // if (chosenCell == X)  game end
+        // else if (chosenCell != "    ")    update gameBoard to show the given number from solutionBoard
+        // else  (chosen>Cell)   ==  ( "     ")     call method openAdjacentCells  ( väldigt lik countAdjacentCells)
+        // när vi kollar om en granncell också är "tom" kommer vi kalla på samma metod som vi är i med den cellens index
 
-      /*   int number = 0; // anropet
-        gameboard[rowNumber][column] = number;
-        if(number == 0){
-            // anropa öppna tomma rutor automatiskt
-        } */
+        // checkWin(mine);
+
+
+
     }
     public boolean checkWin(Mines mine) {
         char[][] board = gameBoard.getBoard();
