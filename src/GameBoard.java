@@ -15,14 +15,16 @@ public class GameBoard {
 
     public void updateBoardLayout() {
         boardLayout = "\n            A     B     C     D     E     F     G     H     I\n";
-        boardLayout += "         +-----+-----+-----+-----+-----+-----+-----+-----+-----+ \n";
+        boardLayout += "         +⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+  \n";
         for (int i = 0; i < 9; i++) {
-            boardLayout += "       " + (i + 1) + " |";
+            boardLayout += "       " + (i + 1) + " │";
             for (int j = 0; j < 9; j++) {
-                boardLayout += "  " + board[i][j] + "  |";
+                boardLayout += "  " + board[i][j] + "  │";
             }
-            boardLayout += "\n         +-----+-----+-----+-----+-----+-----+-----+-----+-----+\n";
+            if(i<8){
+            boardLayout += "\n         +⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯+\n";}
         }
+        boardLayout += "\n         +⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+";
     }
 
     public String getBoardLayout() {

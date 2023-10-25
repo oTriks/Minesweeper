@@ -5,7 +5,7 @@ public class Mines {
     private GameBoard gameboard;
     int randomRow;
     int randomCol;
-    private char symbol = '*';
+    private char symbol = '☢';
     private int quantity = 10;
 
     public Mines(GameBoard gameboard) {

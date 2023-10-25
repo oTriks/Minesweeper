@@ -1,8 +1,9 @@
-public class Game {
+import java.util.Scanner;
 
+public class Game {
+    Scanner sc = new Scanner(System.in);
     GameBoard gameBoard = new GameBoard();
     Mines mines = new Mines(gameBoard);
-
 
     //                         timer funktion
     // long start = System.currentTimeMillis(); // anropa programmets start
@@ -10,35 +11,29 @@ public class Game {
     //   long totalTime = stop - start;
     //  System.out.println("Time: " + totalTime + " s");
 
-
     public Game() {
-
         //TODO: ************ TA BORT INNAN PUSH!!!! ****************
-        gameBoard.setCell(3, 3, 'Ä');
         if(!mines.isMine(3, 3)){
             System.out.println("hejhjehje");
         }
         mines.showAllMines();
-        //TODO: ***********************************
-
-        makeMove("a1", mines);
-
+        //TODO: ****************************************************
+        makeMove(mines);
     }
 
-
-
-    public void makeMove(String choice, Mines mine) {
-
+    public void makeMove(Mines mine) {
+        String choice = sc.nextLine();
         char row = choice.charAt(0);
         int rowNumber = Character.toUpperCase(row) - 65;
         int column = Integer.parseInt(choice.substring(1, 2)) -1;
         mine.isMine(rowNumber, column);
         checkWin(mine);
-         // if valid choice etc ....
+
+        // if valid choice etc ....
         // valid choice?
         // anrop siffra avstånd till mina
 
-      /*   int number = 0; // anropet
+        /* int number = 0; // anropet
         gameboard[rowNumber][column] = number;
         if(number == 0){
             // anropa öppna tomma rutor automatiskt
