@@ -27,12 +27,15 @@ public class GameBoard {
         return boardLayout;
     }
 
+    public char getCell(int row, int col) {
+        return board[row][col];
+    }
 
-    //Use code beneath to call the board´s layout in Main.java.
+    public void setCell(int row, int col,char value) {
+        board[row][col] = value;
+    }
 
-//    GameBoard gameBoard = new GameBoard();
-//        gameBoard.updateBoardLayout();
-//
-//        System.out.println(gameBoard.getBoardLayout());
-
+    public char[][] getBoard() {
+        return board;
+    }
 }

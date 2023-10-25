@@ -1,23 +1,6 @@
 public class OpenEmptyTile {
-    public static void main(String[] args) {
-        int[][] board = {
-                {0, 1, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {1, 0, 0, 1, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 1}
-        };
 
-        int[][] result = calculateAdjacentMines(board);
 
-        // Print the result
-        for (int i = 0; i < result.length; i++) {
-            for (int j = 0; j < result[i].length; j++) {
-                System.out.print(result[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
     public static int[][] calculateAdjacentMines(int[][] board) {
         int numRows = board.length;
         int numCols = board[0].length;
@@ -57,7 +40,6 @@ public class OpenEmptyTile {
                 }
             }
         }
-
         return count;
     }
 }
