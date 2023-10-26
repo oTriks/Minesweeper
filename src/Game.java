@@ -4,7 +4,7 @@ public class Game {
     Scanner sc = new Scanner(System.in);
     GameBoard gameBoard = new GameBoard();
    
-    Mines mines = new Mines(gameBoard);
+    Mines mines = new Mines();
 
     //                         timer funktion
     // long start = System.currentTimeMillis(); // anropa programmets start

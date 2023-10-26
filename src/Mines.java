@@ -10,8 +10,8 @@ public class Mines {   // byta namn?
     private char symbol = '☢';
     private int quantity = 10;
 
-    public Mines(GameBoard solutionBoard) {
-        this.solutionBoard = solutionBoard;
+    public Mines() {
+       // this.solutionBoard = solutionBoard;
         setupField();
         calculateAdjacentMines(solutionBoard);
     }
