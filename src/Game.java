@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Game {
     Scanner sc = new Scanner(System.in);
     GameBoard gameBoard = new GameBoard();
-   
     Mines mines = new Mines();
 
     //                         timer funktion
@@ -14,6 +13,8 @@ public class Game {
     //  System.out.println("Time: " + totalTime + " s");
 
     public Game() {
+        System.out.println(gameBoard.getBoardLayout());
+        mines.showAllMines();
         System.out.println("Skriv in vilken ruta du vill öppna:");
         makeMove();
     }
@@ -23,8 +24,6 @@ public class Game {
         char rowNumber = choice.charAt(0);
         int row = Character.toUpperCase(rowNumber) - 65;
         int col = Integer.parseInt(choice.substring(1, 2)) -1;
-
-
    
         //TODO ************** TEST TEST TEST *****************
         //Placing a mine to test if it writes out game over when opening D4
@@ -40,8 +39,8 @@ public class Game {
         System.out.println(col);
         System.out.println(row);
         //TODO ************** TEST TEST TEST *****************
-        GameBoard solutionBoard = mines.getSolutionBoard();
-        char chosenCell = solutionBoard.getCell(row, col);
+        //GameBoard solutionBoard = mines.getSolutionBoard();
+        //char chosenCell = solutionBoard.getCell(row, col);
          // if (chosenCell == X)  game end
         // else if (chosenCell != "    ")    update gameBoard to show the given number from solutionBoard
         // else  (chosen>Cell)   ==  ( "     ")     call method openAdjacentCells  ( väldigt lik countAdjacentCells)

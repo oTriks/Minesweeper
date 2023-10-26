@@ -6,11 +6,11 @@ public class GameBoard {
         board = new char[9][9];
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                board[i][j] = ' ';
+                board[i][j] = '?';
             }
         }
         updateBoardLayout();
-        System.out.println(boardLayout);
+
     }
     
 
