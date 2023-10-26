@@ -21,8 +21,9 @@ public class GameBoard {
             for (int j = 0; j < 9; j++) {
                 boardLayout += "  " + board[i][j] + "  │";
             }
-            if(i<8){
-            boardLayout += "\n         +⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯+\n";}
+            if (i < 8) {
+                boardLayout += "\n         +⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯+\n";
+            }
         }
         boardLayout += "\n         +⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+";
     }
@@ -35,7 +36,7 @@ public class GameBoard {
         return board[row][col];
     }
 
-    public void setCell(int row, int col,char value) {
+    public void setCell(int row, int col, char value) {
         board[row][col] = value;
         updateBoardLayout();
     }
