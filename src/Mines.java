@@ -2,36 +2,51 @@ import java.util.Random;
 
 public class Mines {   // byta namn?
     Random random = new Random();
+
     GameBoard solutionBoard = new GameBoard();
+
     int randomRow;
     int randomCol;
-    private char symbol = 'X';
+    private char symbol = '☢';
     private int quantity = 10;
 
-    public Mines() {
+    public Mines(GameBoard solutionBoard) {
+        this.solutionBoard = solutionBoard;
         setupField();
         calculateAdjacentMines(solutionBoard);
     }
 
+    public char getSymbol() {
+        return symbol;
+    }
+
     public void setupField() {
         while (quantity != 0) {
-            randomRow = random.nextInt(10);
-            randomCol = random.nextInt(10);
+            randomRow = random.nextInt(9);
+            randomCol = random.nextInt(9);
             //System.out.println(randomRow + " + " + randomCol);
-            if (!isMine(randomRow, randomCol)){
+            if (!isMine(randomRow, randomCol)) {
                 placeMine();
                 quantity--;
             }
         }
     }
 
+    public void showAllMines() {
+        System.out.println(solutionBoard.getBoardLayout());
+    }
+
     public boolean isMine(int row, int col) {
-        return solutionBoard.getCell(row, col) == symbol;
+
+        char[][] board = solutionBoard.getBoard();
+        return board[row][col] == symbol;
+
     }
 
     public void placeMine() {
         solutionBoard.setCell(randomRow, randomCol, symbol);
     }
+
 
     // en gång
     public void calculateAdjacentMines(GameBoard solutionBoard) {
@@ -69,4 +84,5 @@ public class Mines {   // byta namn?
     public GameBoard getSolutionBoard() {  // används i game klassen för att kolla spelarens val mot lösningen
         return solutionBoard;
     }
+
 }

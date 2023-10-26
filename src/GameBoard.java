@@ -1,5 +1,5 @@
 public class GameBoard {
-    private final char[][] board;
+    private char[][] board;
     public String boardLayout;
 
     public GameBoard() {
@@ -9,18 +9,26 @@ public class GameBoard {
                 board[i][j] = ' ';
             }
         }
+        updateBoardLayout();
+        System.out.println(boardLayout);
     }
 
-    public void updateBoardLayout() {   // döpa till print board? lägg till parameter  board om vi vill att vi ska kunna printa solutionboard för att kolla så uträkningar etc stämmer
-        boardLayout = "\n            A    B    C    D    E    F    G    H    I\n";
-        boardLayout += "          ____ ____ ____ ____ ____ ____ ____ ____ ____ \n";
+
+
+    public void updateBoardLayout() {  // döpa till print board? lägg till parameter  board om vi vill att vi ska kunna printa solutionboard för att kolla så uträkningar etc stämmer
+        boardLayout = "\n            A     B     C     D     E     F     G     H     I\n";
+        boardLayout += "         +⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+  \n";
+
         for (int i = 0; i < 9; i++) {
-            boardLayout += "       " + (i + 1) + " |";
+            boardLayout += "       " + (i + 1) + " │";
             for (int j = 0; j < 9; j++) {
-                boardLayout += "  " + board[i][j] + " |";
+                boardLayout += "  " + board[i][j] + "  │";
             }
-            boardLayout += "\n         |____|____|____|____|____|____|____|____|____|\n";
+            if (i < 8) {
+                boardLayout += "\n         +⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯│⎯⎯⎯+\n";
+            }
         }
+        boardLayout += "\n         +⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+";
     }
 
     public String getBoardLayout() {
@@ -31,8 +39,9 @@ public class GameBoard {
         return board[row][col];
     }
 
-    public void setCell(int row, int col,char value) {
+    public void setCell(int row, int col, char value) {
         board[row][col] = value;
+        updateBoardLayout();
     }
 
     public char[][] getBoard() {

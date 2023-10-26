@@ -1,10 +1,8 @@
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Välkommen till spelet!");
+        System.out.println("         ⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽ MINESWEEPER ⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽");
         Game game = new Game();
-
-
 
     }
 }
