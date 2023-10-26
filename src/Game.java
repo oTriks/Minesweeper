@@ -14,7 +14,7 @@ public class Game {
 
     public Game() {
         System.out.println(gameBoard.getBoardLayout());
-        mines.showAllMines();
+        mines.showSolutionBoard();
         System.out.println("Skriv in vilken ruta du vill öppna:");
         makeMove();
     }
@@ -33,9 +33,12 @@ public class Game {
 
         if (mines.isMine(row, col)) {
             System.out.println("Game over!");
-            mines.showAllMines();
+            mines.showSolutionBoard();
             //gameOver();
         }
+
+        System.out.println(gameBoard.getBoardLayout());
+
         System.out.println(col);
         System.out.println(row);
         //TODO ************** TEST TEST TEST *****************
@@ -47,8 +50,6 @@ public class Game {
         // när vi kollar om en granncell också är "tom" kommer vi kalla på samma metod som vi är i med den cellens index
       
         checkWin();
-
-
 
 
     }

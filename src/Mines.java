@@ -31,7 +31,7 @@ public class Mines {   // byta namn?
         }
     }
 
-    public void showAllMines() {
+    public void showSolutionBoard() {
         System.out.println(solutionBoard.getBoardLayout());
     }
 
