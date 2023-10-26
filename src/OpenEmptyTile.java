@@ -1,6 +1,5 @@
 public class OpenEmptyTile {
 
-
     public static int[][] calculateAdjacentMines(int[][] board) {
         int numRows = board.length;
         int numCols = board[0].length;

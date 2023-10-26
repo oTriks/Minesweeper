@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class Mines {   // byta namn?
     Random random = new Random();
-
     GameBoard solutionBoard = new GameBoard();
 
     int randomRow;
@@ -32,15 +31,13 @@ public class Mines {   // byta namn?
         }
     }
 
-    public void showAllMines() {
+    public void showSolutionBoard() {
         System.out.println(solutionBoard.getBoardLayout());
     }
 
     public boolean isMine(int row, int col) {
-
         char[][] board = solutionBoard.getBoard();
         return board[row][col] == symbol;
-
     }
 
     public void placeMine() {
@@ -78,7 +75,8 @@ public class Mines {   // byta namn?
                 }
             }
         }
-        return (char)count;
+
+        return Character.forDigit(count, 10);
     }
 
     public GameBoard getSolutionBoard() {  // används i game klassen för att kolla spelarens val mot lösningen
