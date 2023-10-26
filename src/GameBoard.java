@@ -16,6 +16,7 @@ public class GameBoard {
 
 
     public void updateBoardLayout() {  // döpa till print board? lägg till parameter  board om vi vill att vi ska kunna printa solutionboard för att kolla så uträkningar etc stämmer
+
         boardLayout = "\n            A     B     C     D     E     F     G     H     I\n";
         boardLayout += "         +⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+  \n";
 
@@ -30,7 +31,19 @@ public class GameBoard {
         }
         boardLayout += "\n         +⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+⎯⎯⎯+";
     }
-
+    
+  /*public void updateBoardLayout() {
+    boardLayout = "\n            A    B    C    D    E    F    G    H    I\n";
+    boardLayout += "          ____ ____ ____ ____ ____ ____ ____ ____ ____ \n";
+        for (int i = 0; i < 9; i++) {
+        boardLayout += "       " + (i + 1) + " |";
+        for (int j = 0; j < 9; j++) {
+            boardLayout += "  " + board[i][j] + " |";
+        }
+        boardLayout += "\n         |____|____|____|____|____|____|____|____|____|\n";
+    }
+}
+*/
     public String getBoardLayout() {
         return boardLayout;
     }
