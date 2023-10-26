@@ -3,10 +3,12 @@ import java.util.Scanner;
 public class Game {
     Scanner sc = new Scanner(System.in);
     GameBoard gameBoard = new GameBoard();
+   
     Mines mines = new Mines(gameBoard);
 
     //                         timer funktion
     // long start = System.currentTimeMillis(); // anropa programmets start
+
     // long stop = System.currentTimeMillis(); // anropa programmets slut
     //   long totalTime = stop - start;
     //  System.out.println("Time: " + totalTime + " s");
@@ -18,36 +20,38 @@ public class Game {
 
     public void makeMove() {
         String choice = sc.nextLine();
-        char row = choice.charAt(0);
-        int rowNumber = Character.toUpperCase(row) - 65;
-        int column = Integer.parseInt(choice.substring(1, 2)) - 1;
+        char rowNumber = choice.charAt(0);
+        int row = Character.toUpperCase(rowNumber) - 65;
+        int col = Integer.parseInt(choice.substring(1, 2)) -1;
 
+
+   
         //TODO ************** TEST TEST TEST *****************
         //Placing a mine to test if it writes out game over when opening D4
 
         char symbol = mines.getSymbol();
         gameBoard.setCell(3, 3, symbol);
 
-        if (mines.isMine(rowNumber, column)) {
+        if (mines.isMine(row, col)) {
             System.out.println("Game over!");
             mines.showAllMines();
             //gameOver();
         }
-        System.out.println(column);
-        System.out.println(rowNumber);
+        System.out.println(col);
+        System.out.println(row);
         //TODO ************** TEST TEST TEST *****************
-
+        GameBoard solutionBoard = mines.getSolutionBoard();
+        char chosenCell = solutionBoard.getCell(row, col);
+         // if (chosenCell == X)  game end
+        // else if (chosenCell != "    ")    update gameBoard to show the given number from solutionBoard
+        // else  (chosen>Cell)   ==  ( "     ")     call method openAdjacentCells  ( väldigt lik countAdjacentCells)
+        // när vi kollar om en granncell också är "tom" kommer vi kalla på samma metod som vi är i med den cellens index
+      
         checkWin();
 
-        // if valid choice etc ....
-        // valid choice?
-        // anrop siffra avstånd till mina
 
-        /* int number = 0; // anropet
-        gameboard[rowNumber][column] = number;
-        if(number == 0){
-            // anropa öppna tomma rutor automatiskt
-        } */
+
+
     }
 
     public boolean checkWin() {
