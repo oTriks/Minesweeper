@@ -5,6 +5,9 @@ public class Game {
     Scanner sc = new Scanner(System.in);
     GameBoard gameBoard = new GameBoard();
     Mines mines = new Mines();
+    int moves = 0;
+    long start;
+    long stop;
 
     //                         timer funktion
     // long start = System.currentTimeMillis(); // anropa programmets start
@@ -15,14 +18,15 @@ public class Game {
 
     public Game() {
         makeMove();
-
     }
 
     public void makeMove() {
+        moves ++;
         mines.showSolutionBoard();   // ska tas bort, bara facit för felsökning
         System.out.println(gameBoard.getBoardLayout());
         System.out.println("Skriv in vilken ruta du vill öppna:");
         String input = sc.nextLine();
+        if(moves == 1){start = System.currentTimeMillis();}
         int[] result = isValidChoice(input);
 
         if (result != null) {
