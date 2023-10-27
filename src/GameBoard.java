@@ -15,10 +15,10 @@ public class GameBoard {
     
 
   public void updateBoardLayout() {
-    boardLayout = "\n            A    B    C    D    E    F    G    H    I\n";
+    boardLayout = "\n            1    2    3    4    5    6    7    8    9\n";
     boardLayout += "          ____ ____ ____ ____ ____ ____ ____ ____ ____ \n";
         for (int i = 0; i < 9; i++) {
-        boardLayout += "       " + (i + 1) + " |";
+        boardLayout += "       " + (char) ('A' + i) + " |";
         for (int j = 0; j < 9; j++) {
             boardLayout += "  " + board[i][j] + " |";
         }
