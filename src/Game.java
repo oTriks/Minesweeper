@@ -32,12 +32,12 @@ public class Game {
         if (result != null) {
             int row = result[0];
             int col = result[1];
-
+            openCells(row, col);
            checkGameStatus(row, col);
 
-        } else {
-            makeMove();
-        }
+        } //else {
+        // makeMove();
+        //}
     }
 
     public void openCells(int row, int col) {
@@ -115,7 +115,7 @@ public class Game {
             mines.showSolutionBoard();
             System.out.println("Grattis! Du har vunnit spelet! ");
         } else {
-            openCells(row, col);
+            // openCells(row, col);
             makeMove();
         }
     }
