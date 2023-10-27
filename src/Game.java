@@ -24,6 +24,7 @@ public class Game {
         String choice = sc.nextLine();
         char rowNumber = choice.charAt(0);
         int row = Character.toUpperCase(rowNumber) - 65;
+
         int col = Integer.parseInt(choice.substring(1, 2)) - 1;
 
         if (mines.isMine(row, col)) {
@@ -34,6 +35,7 @@ public class Game {
             checkWin();
             makeMove();
         }
+
     }
 
     public void openCells(int row, int col) {
@@ -58,6 +60,7 @@ public class Game {
             }
         }
 
+
     }
 
     public boolean checkWin() {
@@ -70,6 +73,22 @@ public class Game {
             }
         }
         return true;
+    }
+
+    public void isValidChoice(String input) {
+        try {
+                char rowNumber = input.charAt(0);
+                int row = Character.toUpperCase(rowNumber) - 65;
+                int col = Integer.parseInt(input.substring(1, 2)) -1;
+
+                //If it's not a '?'
+
+        } catch (StringIndexOutOfBoundsException | NumberFormatException | ArrayIndexOutOfBoundsException e){
+            System.out.println("Invalid input. Please enter a valid move in the format 'A1', 'B2', etc.");
+        }
+        //Is the choice within the board? (row and column indices between 0 and 8?)
+        //Has the selected cell already been opened? (if it's not a '?')
+        //Is the input choice in the correct format? (is input letter followed by a number?)
     }
 
 }
