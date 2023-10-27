@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Game {
@@ -21,29 +22,32 @@ public class Game {
         mines.showSolutionBoard();   // ska tas bort, bara facit för felsökning
         System.out.println(gameBoard.getBoardLayout());
         System.out.println("Skriv in vilken ruta du vill öppna:");
-        String choice = sc.nextLine();
-        char rowNumber = choice.charAt(0);
-        int row = Character.toUpperCase(rowNumber) - 65;
+        String input = sc.nextLine();
+        int[] result = isValidChoice(input);
 
-        int col = Integer.parseInt(choice.substring(1, 2)) - 1;
+        if (result != null) {
+            int row = result[0];
+            int col = result[1];
 
-        if (mines.isMine(row, col)) {
-            System.out.println("Game over!");
-            mines.showSolutionBoard();
+            if (mines.isMine(row, col)) {
+                System.out.println("Game over!");
+                mines.showSolutionBoard();
+            } else {
+                openCells(row, col);
+                checkWin();
+                makeMove();
+            }
         } else {
-            openCells(row, col);
-            checkWin();
             makeMove();
         }
-
     }
 
     public void openCells(int row, int col) {
         gameBoard.setCell(row, col, mines.getSolutionBoard().getCell(row, col));
-        if (mines.getSolutionBoard().getCell(row, col) == Character.forDigit(0, 10)){
+        if (mines.getSolutionBoard().getCell(row, col) == Character.forDigit(0, 10)) {
             int[][] neighbors = {
                     {-1, -1}, {-1, 0}, {-1, 1},
-                    {0, -1},          {0, 1},
+                    {0, -1}, {0, 1},
                     {1, -1}, {1, 0}, {1, 1}
             };
             for (int[] neighbor : neighbors) {
@@ -52,7 +56,7 @@ public class Game {
                 if (newRow >= 0 && newRow < 9 && newCol >= 0 && newCol < 9) {
                     if (mines.solutionBoard.getCell(newRow, newCol) == Character.forDigit(0, 10) && gameBoard.getCell(newRow, newCol) == '?') {
                         openCells(newRow, newCol);
-                    }else{
+                    } else {
                         gameBoard.setCell(newRow, newCol, mines.getSolutionBoard().getCell(newRow, newCol));
 
                     }
@@ -75,20 +79,33 @@ public class Game {
         return true;
     }
 
-    public void isValidChoice(String input) {
+    public int[] isValidChoice(String input) {
+        int row;
+        int col;
         try {
-                char rowNumber = input.charAt(0);
-                int row = Character.toUpperCase(rowNumber) - 65;
-                int col = Integer.parseInt(input.substring(1, 2)) -1;
+            char rowNumber = input.charAt(0);
+            row = Character.toUpperCase(rowNumber) - 65;
+            col = Integer.parseInt(input.substring(1)) - 1;
 
-                //If it's not a '?'
+            if (row < 0 || row >= 9 || col < 0 || col >= 9) {
+                System.out.println("Ogiltig inmatning. Ruta finns inte på brädet.");
+                return null;
+            }
 
-        } catch (StringIndexOutOfBoundsException | NumberFormatException | ArrayIndexOutOfBoundsException e){
-            System.out.println("Invalid input. Please enter a valid move in the format 'A1', 'B2', etc.");
+            if (gameBoard.getCell(row, col) != '?') {
+                System.out.println("Du har redan öppnat denna ruta. Skriv in en annan ruta.");
+                return null;
+            }
+
+        } catch (StringIndexOutOfBoundsException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("Ogiltig inmatning. Skriv i formatet 'A1', 'B2', etc.");
+            return null;
         }
-        //Is the choice within the board? (row and column indices between 0 and 8?)
-        //Has the selected cell already been opened? (if it's not a '?')
-        //Is the input choice in the correct format? (is input letter followed by a number?)
+        int[] result = new int[2];
+        result[0] = row;
+        result[1] = col;
+
+        return result;
     }
 
 }
