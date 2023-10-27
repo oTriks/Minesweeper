@@ -26,16 +26,9 @@ public class Game {
         int row = Character.toUpperCase(rowNumber) - 65;
         int col = Integer.parseInt(choice.substring(1, 2)) - 1;
 
-        //TODO ************** TEST TEST TEST *****************
-        //Placing a mine to test if it writes out game over when opening D4
-
-        char symbol = mines.getSymbol();
-        gameBoard.setCell(3, 3, symbol);
-
         if (mines.isMine(row, col)) {
             System.out.println("Game over!");
             mines.showSolutionBoard();
-            //gameOver();
         } else {
             openCells(row, col);
             checkWin();
