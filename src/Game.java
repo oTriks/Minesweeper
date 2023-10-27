@@ -27,18 +27,14 @@ public class Game {
    
         //TODO ************** TEST TEST TEST *****************
         //Placing a mine to test if it writes out game over when opening D4
-
         char symbol = mines.getSymbol();
         gameBoard.setCell(3, 3, symbol);
-
         if (mines.isMine(row, col)) {
             System.out.println("Game over!");
             mines.showSolutionBoard();
             //gameOver();
         }
-
         System.out.println(gameBoard.getBoardLayout());
-
         System.out.println(col);
         System.out.println(row);
         //TODO ************** TEST TEST TEST *****************
@@ -48,10 +44,7 @@ public class Game {
         // else if (chosenCell != "    ")    update gameBoard to show the given number from solutionBoard
         // else  (chosen>Cell)   ==  ( "     ")     call method openAdjacentCells  ( väldigt lik countAdjacentCells)
         // när vi kollar om en granncell också är "tom" kommer vi kalla på samma metod som vi är i med den cellens index
-      
         checkWin();
-
-
     }
 
     public boolean checkWin() {
@@ -66,8 +59,20 @@ public class Game {
         return true;
     }
 
-    public void isValidChoice() {
+    public void isValidChoice(String input) {
+        try {
+                char rowNumber = input.charAt(0);
+                int row = Character.toUpperCase(rowNumber) - 65;
+                int col = Integer.parseInt(input.substring(1, 2)) -1;
 
+                //If it's not a '?'
+
+        } catch (StringIndexOutOfBoundsException | NumberFormatException | ArrayIndexOutOfBoundsException e){
+            System.out.println("Invalid input. Please enter a valid move in the format 'A1', 'B2', etc.");
+        }
+        //Is the choice within the board? (row and column indices between 0 and 8?)
+        //Has the selected cell already been opened? (if it's not a '?')
+        //Is the input choice in the correct format? (is input letter followed by a number?)
     }
 
 }
