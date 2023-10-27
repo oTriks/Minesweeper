@@ -66,4 +66,8 @@ public class Game {
         return true;
     }
 
+    public void isValidChoice() {
+
+    }
+
 }
