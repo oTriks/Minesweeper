@@ -33,14 +33,8 @@ public class Game {
             int row = result[0];
             int col = result[1];
 
-            if (mines.isMine(row, col)) {
-                System.out.println("Game over!");
-                mines.showSolutionBoard();
-            } else {
-                openCells(row, col);
-                checkWin();
-                makeMove();
-            }
+           checkGameStatus(row, col);
+
         } else {
             makeMove();
         }
@@ -111,5 +105,25 @@ public class Game {
 
         return result;
     }
+
+    public void checkGameStatus(int row, int col) {
+        if (mines.isMine(row, col)) {
+            mines.showSolutionBoard();
+            System.out.println("Game over! Du har träffat en mina! ");
+            //spela igen? vid förlust
+        } else if (checkWin()) {
+            mines.showSolutionBoard();
+            System.out.println("Grattis! Du har vunnit spelet! ");
+        } else {
+            openCells(row, col);
+            makeMove();
+        }
+    }
+
+    //public void askToPlayAgain() {
+    //System.out.println("Vill du spela igen? (ja/nej)");
+    // String response = sc.nextLine();
+    // if (response)
+    // }
 
 }
