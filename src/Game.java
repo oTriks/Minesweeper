@@ -69,7 +69,7 @@ public class Game {
         char[][] board = gameBoard.getBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (board[i][j] == ' ' && !mines.isMine(i, j)) {
+                if (board[i][j] == '?' && !mines.isMine(i, j)) {
                     return false;
                 }
             }
