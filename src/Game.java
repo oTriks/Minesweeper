@@ -13,18 +13,19 @@ public class Game {
     //  System.out.println("Time: " + totalTime + " s");
 
     public Game() {
-        System.out.println(gameBoard.getBoardLayout());
-        mines.showSolutionBoard();
-        System.out.println("Skriv in vilken ruta du vill öppna:");
         makeMove();
+
     }
 
     public void makeMove() {
+        mines.showSolutionBoard();   // ska tas bort, bara facit för felsökning
+        System.out.println(gameBoard.getBoardLayout());
+        System.out.println("Skriv in vilken ruta du vill öppna:");
         String choice = sc.nextLine();
         char rowNumber = choice.charAt(0);
         int row = Character.toUpperCase(rowNumber) - 65;
-        int col = Integer.parseInt(choice.substring(1, 2)) -1;
-   
+        int col = Integer.parseInt(choice.substring(1, 2)) - 1;
+
         //TODO ************** TEST TEST TEST *****************
         //Placing a mine to test if it writes out game over when opening D4
 
@@ -35,22 +36,34 @@ public class Game {
             System.out.println("Game over!");
             mines.showSolutionBoard();
             //gameOver();
+        } else {
+            openCells(row, col);
+            checkWin();
+            makeMove();
         }
+    }
 
-        System.out.println(gameBoard.getBoardLayout());
+    public void openCells(int row, int col) {
+        gameBoard.setCell(row, col, mines.getSolutionBoard().getCell(row, col));
+        if (mines.getSolutionBoard().getCell(row, col) == Character.forDigit(0, 10)){
+            int[][] neighbors = {
+                    {-1, -1}, {-1, 0}, {-1, 1},
+                    {0, -1},          {0, 1},
+                    {1, -1}, {1, 0}, {1, 1}
+            };
+            for (int[] neighbor : neighbors) {
+                int newRow = row + neighbor[0];
+                int newCol = col + neighbor[1];
+                if (newRow >= 0 && newRow < 9 && newCol >= 0 && newCol < 9) {
+                    if (mines.solutionBoard.getCell(newRow, newCol) == Character.forDigit(0, 10) && gameBoard.getCell(newRow, newCol) == '?') {
+                        openCells(newRow, newCol);
+                    }else{
+                        gameBoard.setCell(newRow, newCol, mines.getSolutionBoard().getCell(newRow, newCol));
 
-        System.out.println(col);
-        System.out.println(row);
-        //TODO ************** TEST TEST TEST *****************
-        //GameBoard solutionBoard = mines.getSolutionBoard();
-        //char chosenCell = solutionBoard.getCell(row, col);
-         // if (chosenCell == X)  game end
-        // else if (chosenCell != "    ")    update gameBoard to show the given number from solutionBoard
-        // else  (chosen>Cell)   ==  ( "     ")     call method openAdjacentCells  ( väldigt lik countAdjacentCells)
-        // när vi kollar om en granncell också är "tom" kommer vi kalla på samma metod som vi är i med den cellens index
-      
-        checkWin();
-
+                    }
+                }
+            }
+        }
 
     }
 
