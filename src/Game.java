@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Game {
@@ -6,8 +5,8 @@ public class Game {
     GameBoard gameBoard = new GameBoard();
     Mines mines = new Mines();
     int moves = 0;
-    long start;
-    long stop;
+    double start;
+    double stop;
 
 
     public Game() {
@@ -23,7 +22,7 @@ public class Game {
         if (moves == 1) {
             start = System.currentTimeMillis();
         }
-        int[] result = isValidChoice(input);
+        int[] result = isCellValidChoice(input);
 
         if (result != null) {
             int row = result[0];
@@ -73,7 +72,7 @@ public class Game {
         return true;
     }
 
-    public int[] isValidChoice(String input) {
+    public int[] isCellValidChoice(String input) {
         int row;
         int col;
 
@@ -102,18 +101,23 @@ public class Game {
         return result;
     }
 
+   // public boolean isValidInput(String input){
+
+     //   return result;
+    //}
+
     public void checkGameStatus(int row, int col) {
         if (mines.isMine(row, col)) {
             mines.showSolutionBoard();
             stop = System.currentTimeMillis();
             System.out.println("Game over! Du har träffat en mina! ");
+            System.out.println("Tid: " + (stop - start)/1000 + " s");
             askToPlayAgain();
         } else if (checkWin()) {
             mines.showSolutionBoard();
             stop = System.currentTimeMillis();
             System.out.println("Grattis! Du har vunnit spelet! ");
-
-            System.out.println("Tid: " + (stop - start) + " s");
+            System.out.println("Tid: " + (stop - start)/1000 + " s");
             askToPlayAgain();
 
         } else {
