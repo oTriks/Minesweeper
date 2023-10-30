@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Mines {   // byta namn?
+public class Mines {
     Random random = new Random();
     GameBoard solutionBoard = new GameBoard();
 
@@ -10,20 +10,15 @@ public class Mines {   // byta namn?
     private int quantity = 10;
 
     public Mines() {
-       // this.solutionBoard = solutionBoard;
         setupField();
         calculateAdjacentMines(solutionBoard);
     }
 
-    public char getSymbol() {
-        return symbol;
-    }
 
     public void setupField() {
         while (quantity != 0) {
             randomRow = random.nextInt(9);
             randomCol = random.nextInt(9);
-            //System.out.println(randomRow + " + " + randomCol);
             if (!isMine(randomRow, randomCol)) {
                 placeMine();
                 quantity--;
@@ -70,7 +65,7 @@ public class Mines {   // byta namn?
             int newCol = col + neighbor[1];
 
             if (newRow >= 0 && newRow < 9 && newCol >= 0 && newCol < 9) {
-                if (solutionBoard.getCell(newRow, newCol) == symbol){
+                if (solutionBoard.getCell(newRow, newCol) == symbol) {
                     count++;
                 }
             }
