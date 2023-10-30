@@ -35,9 +35,7 @@ public class Game {
             openCells(row, col);
            checkGameStatus(row, col);
 
-        } //else {
-        // makeMove();
-        //}
+        }
     }
 
     public void openCells(int row, int col) {
@@ -80,11 +78,11 @@ public class Game {
     public int[] isValidChoice(String input) {
         int row;
         int col;
+
         try {
             char rowNumber = input.charAt(0);
             row = Character.toUpperCase(rowNumber) - 65;
             col = Integer.parseInt(input.substring(1)) - 1;
-
             if (row < 0 || row >= 9 || col < 0 || col >= 9) {
                 System.out.println("Ogiltig inmatning. Ruta finns inte på brädet.");
                 return null;
@@ -109,17 +107,22 @@ public class Game {
     public void checkGameStatus(int row, int col) {
         if (mines.isMine(row, col)) {
             mines.showSolutionBoard();
+            stop = System.currentTimeMillis();
             System.out.println("Game over! Du har träffat en mina! ");
             askToPlayAgain();
         } else if (checkWin()) {
             mines.showSolutionBoard();
+            stop = System.currentTimeMillis();
             System.out.println("Grattis! Du har vunnit spelet! ");
+
+            System.out.println("Tid: " + (stop - start) + " s");
             askToPlayAgain();
+
         } else {
-            // openCells(row, col);
             makeMove();
         }
     }
+
 
 
 
@@ -129,6 +132,7 @@ public class Game {
         String playAgain = scanner.nextLine();
 
         if (playAgain.equalsIgnoreCase("ja")) {
+             moves = 0;
             gameBoard = new GameBoard();
             System.out.println("Spelet har återställts. Lycka till!");
             makeMove(); // Börja om spelet
