@@ -101,11 +101,6 @@ public class Game {
         return result;
     }
 
-   // public boolean isValidInput(String input){
-
-     //   return result;
-    //}
-
     public void checkGameStatus(int row, int col) {
         if (mines.isMine(row, col)) {
             mines.showSolutionBoard();
@@ -130,14 +125,17 @@ public class Game {
         System.out.print("Vill du spela igen? (ja/nej): ");
         String playAgain = sc.nextLine();
 
-        if (playAgain.equalsIgnoreCase("ja")) {
+        if (playAgain.trim().equalsIgnoreCase("ja")) {   //Trim for cleaning upp the input from spaces
             moves = 0;
             gameBoard = new GameBoard();
             System.out.println("Spelet har återställts. Lycka till!");
             makeMove();
-        } else {
+        } else if (playAgain.trim().equalsIgnoreCase("nej")){
             System.out.println("Tack för att du spelade!");
             System.exit(0);
+        } else {
+            System.out.println("Ogiltig inmatning. Vänligen svara med ja/nej.");
+            askToPlayAgain();
         }
     }
 
