@@ -110,20 +110,35 @@ public class Game {
         if (mines.isMine(row, col)) {
             mines.showSolutionBoard();
             System.out.println("Game over! Du har träffat en mina! ");
-            //spela igen? vid förlust
+            askToPlayAgain();
         } else if (checkWin()) {
             mines.showSolutionBoard();
             System.out.println("Grattis! Du har vunnit spelet! ");
+            askToPlayAgain();
         } else {
             // openCells(row, col);
             makeMove();
         }
     }
 
-    //public void askToPlayAgain() {
-    //System.out.println("Vill du spela igen? (ja/nej)");
-    // String response = sc.nextLine();
-    // if (response)
-    // }
+
+
+    public void askToPlayAgain() {
+        System.out.print("Vill du spela igen? (ja/nej): ");
+        Scanner scanner = new Scanner(System.in);
+        String playAgain = scanner.nextLine();
+
+        if (playAgain.equalsIgnoreCase("ja")) {
+            gameBoard = new GameBoard();
+            System.out.println("Spelet har återställts. Lycka till!");
+            makeMove(); // Börja om spelet
+        } else {
+            System.out.println("Tack för att du spelade!");
+            System.exit(0); // Avsluta programmet om spelaren inte vill spela igen
+        }
+    }
+
 
 }
+
+
