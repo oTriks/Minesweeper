@@ -63,16 +63,24 @@ public class Game {
     }
 
 
+    public boolean checkWin() { // checkwin method is to check if the player wins the game or not
+        char[][] board = gameBoard.getBoard(); //calling current board
+        for (int i = 0; i < 9; i++) { // loop going through rows
+            for (int j = 0; j < 9; j++) { // loop going through cols
+                if (board[i][j] == '?' && !mines.isMine(i, j)) { //if the cell is empty or marked with "?" then return false which means no win
+
+
     public boolean checkWin() {
         char[][] board = gameBoard.getBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] == '?' && !mines.isMine(i, j)) {
+
                     return false;
                 }
             }
         }
-        return true;
+        return true; // if the loop has gone through the entire board without returning false then return true which means its a win
     }
 
     public int[] isCellValidChoice(String input) {
@@ -105,11 +113,20 @@ public class Game {
         return result;
     }
 
-    public void checkGameStatus(int row, int col) {
-        if (mines.isMine(row, col)) {
+    public void checkGameStatus(int row, int col) { // this method is to check if the chosen cell is a mine or if the player win,
+        if (mines.isMine(row, col)) { //if the chosen cell is a mine
+            mines.showSolutionBoard(); //showing the solution board with mine
+            stop = System.currentTimeMillis(); // stop the timerb
+            System.out.println("Game over! Du har träffat en mina! ");
+
+            askToPlayAgain(); // ask if play again
+        } else if (checkWin()) { // if the player won the game
             mines.showSolutionBoard();
             stop = System.currentTimeMillis();
-            System.out.println("Game over! Du har träffat en mina! ");
+            System.out.println("Grattis! Du har vunnit spelet! ");
+
+            System.out.println("Tid: " + (stop - start) + " s"); // a message to show the total time taken to finish the game
+
             System.out.println("Tid: " + (stop - start) / 1000 + " s");
             askToPlayAgain();
 
@@ -118,10 +135,11 @@ public class Game {
             stop = System.currentTimeMillis();
             System.out.println("Grattis! Du har vunnit spelet! ");
             System.out.println("Tid: " + (stop - start) / 1000 + " s");
+
             askToPlayAgain();
 
         } else {
-            makeMove();
+            makeMove(); // if the game still going, continue with the next move
         }
     }
 
