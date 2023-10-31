@@ -13,6 +13,7 @@ public class Game {
         makeMove();
     }
 
+    // scans users input, starts game timer and calls methods to validate input and make the move on the board
     public void makeMove() {
         moves++;
         mines.showSolutionBoard();   // TODO ska tas bort, bara facit för felsökning
@@ -35,6 +36,7 @@ public class Game {
         }
     }
 
+    // takes cell as input and opens one or multiple cells
     public void openCells(int row, int col) {
         gameBoard.setCell(row, col, mines.getSolutionBoard().getCell(row, col));
         if (mines.getSolutionBoard().getCell(row, col) == Character.forDigit(0, 10)) {
@@ -59,6 +61,7 @@ public class Game {
 
 
     }
+
 
     public boolean checkWin() {
         char[][] board = gameBoard.getBoard();
