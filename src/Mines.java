@@ -1,29 +1,26 @@
 import java.util.Random;
 
-public class Mines {   // byta namn?
+public class Mines {
     Random random = new Random();
     GameBoard solutionBoard = new GameBoard();
 
     int randomRow;
     int randomCol;
-    private char symbol = '☢';
-    private int quantity = 10;
+    private char symbol = '✸';
+    private int quantity = 15;
 
     public Mines() {
-       // this.solutionBoard = solutionBoard;
         setupField();
         calculateAdjacentMines(solutionBoard);
     }
 
-    public char getSymbol() {
-        return symbol;
-    }
 
     public void setupField() {
+        //Randomize a minefield
         while (quantity != 0) {
             randomRow = random.nextInt(9);
             randomCol = random.nextInt(9);
-            //System.out.println(randomRow + " + " + randomCol);
+            //Only place the mine when there's no mine in that position already, otherwise continue with new position
             if (!isMine(randomRow, randomCol)) {
                 placeMine();
                 quantity--;
@@ -45,7 +42,10 @@ public class Mines {   // byta namn?
     }
 
 
-    // en gång
+
+    // sets up the solutionboard by updating each cell with the number of adjacent mines
+
+
     public void calculateAdjacentMines(GameBoard solutionBoard) {
 
         for (int i = 0; i < 9; i++) {
@@ -57,6 +57,7 @@ public class Mines {   // byta namn?
         }
     }
 
+    // counting number of adjacent mines for each cell on the board
     public char countAdjacentMines(GameBoard solutionBoard, int row, int col) {
         int count = 0;
 
@@ -70,7 +71,7 @@ public class Mines {   // byta namn?
             int newCol = col + neighbor[1];
 
             if (newRow >= 0 && newRow < 9 && newCol >= 0 && newCol < 9) {
-                if (solutionBoard.getCell(newRow, newCol) == symbol){
+                if (solutionBoard.getCell(newRow, newCol) == symbol) {
                     count++;
                 }
             }
