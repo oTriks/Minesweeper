@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Game {
@@ -6,14 +5,15 @@ public class Game {
     GameBoard gameBoard = new GameBoard();
     Mines mines = new Mines();
     int moves = 0;
-    long start;
-    long stop;
+    double start;
+    double stop;
 
 
     public Game() {
         makeMove();
     }
 
+    // scans users input, starts game timer and calls methods to validate input and make the move on the board
     public void makeMove() {
         moves++;
         mines.showSolutionBoard();   // TODO ska tas bort, bara facit för felsökning
@@ -23,7 +23,7 @@ public class Game {
         if (moves == 1) {
             start = System.currentTimeMillis();
         }
-        int[] result = isValidChoice(input);
+        int[] result = isCellValidChoice(input);
 
         if (result != null) {
             int row = result[0];
@@ -36,12 +36,13 @@ public class Game {
         }
     }
 
+    // takes cell as input and opens one or multiple cells
     public void openCells(int row, int col) {
         gameBoard.setCell(row, col, mines.getSolutionBoard().getCell(row, col));
         if (mines.getSolutionBoard().getCell(row, col) == Character.forDigit(0, 10)) {
             int[][] neighbors = {
                     {-1, -1}, {-1, 0}, {-1, 1},
-                    {0, -1},          {0, 1},
+                    {0, -1}, {0, 1},
                     {1, -1}, {1, 0}, {1, 1}
             };
             for (int[] neighbor : neighbors) {
@@ -61,11 +62,20 @@ public class Game {
 
     }
 
+
     public boolean checkWin() { // checkwin method is to check if the player wins the game or not
         char[][] board = gameBoard.getBoard(); //calling current board
         for (int i = 0; i < 9; i++) { // loop going through rows
             for (int j = 0; j < 9; j++) { // loop going through cols
                 if (board[i][j] == '?' && !mines.isMine(i, j)) { //if the cell is empty or marked with "?" then return false which means no win
+
+
+    public boolean checkWin() {
+        char[][] board = gameBoard.getBoard();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == '?' && !mines.isMine(i, j)) {
+
                     return false;
                 }
             }
@@ -73,7 +83,7 @@ public class Game {
         return true; // if the loop has gone through the entire board without returning false then return true which means its a win
     }
 
-    public int[] isValidChoice(String input) {
+    public int[] isCellValidChoice(String input) {
         int row;
         int col;
 
@@ -81,6 +91,7 @@ public class Game {
             char rowNumber = input.charAt(0);
             row = Character.toUpperCase(rowNumber) - 65;
             col = Integer.parseInt(input.substring(1)) - 1;
+
             if (row < 0 || row >= 9 || col < 0 || col >= 9) {
                 System.out.println("Ogiltig inmatning. Ruta finns inte på brädet.");
                 return null;
@@ -105,8 +116,9 @@ public class Game {
     public void checkGameStatus(int row, int col) { // this method is to check if the chosen cell is a mine or if the player win,
         if (mines.isMine(row, col)) { //if the chosen cell is a mine
             mines.showSolutionBoard(); //showing the solution board with mine
-            stop = System.currentTimeMillis(); // stop the timer
+            stop = System.currentTimeMillis(); // stop the timerb
             System.out.println("Game over! Du har träffat en mina! ");
+
             askToPlayAgain(); // ask if play again
         } else if (checkWin()) { // if the player won the game
             mines.showSolutionBoard();
@@ -114,6 +126,16 @@ public class Game {
             System.out.println("Grattis! Du har vunnit spelet! ");
 
             System.out.println("Tid: " + (stop - start) + " s"); // a message to show the total time taken to finish the game
+
+            System.out.println("Tid: " + (stop - start) / 1000 + " s");
+            askToPlayAgain();
+
+        } else if (checkWin()) {
+            mines.showSolutionBoard();
+            stop = System.currentTimeMillis();
+            System.out.println("Grattis! Du har vunnit spelet! ");
+            System.out.println("Tid: " + (stop - start) / 1000 + " s");
+
             askToPlayAgain();
 
         } else {
@@ -126,14 +148,17 @@ public class Game {
         System.out.print("Vill du spela igen? (ja/nej): ");
         String playAgain = sc.nextLine();
 
-        if (playAgain.equalsIgnoreCase("ja")) {
+        if (playAgain.trim().equalsIgnoreCase("ja")) {   //Trim for cleaning upp the input from spaces
             moves = 0;
             gameBoard = new GameBoard();
             System.out.println("Spelet har återställts. Lycka till!");
             makeMove();
-        } else {
+        } else if (playAgain.trim().equalsIgnoreCase("nej")) {
             System.out.println("Tack för att du spelade!");
             System.exit(0);
+        } else {
+            System.out.println("Ogiltig inmatning. Vänligen svara med ja/nej.");
+            askToPlayAgain();
         }
     }
 

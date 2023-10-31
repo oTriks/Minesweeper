@@ -6,8 +6,8 @@ public class Mines {
 
     int randomRow;
     int randomCol;
-    private char symbol = '☢';
-    private int quantity = 10;
+    private char symbol = '✸';
+    private int quantity = 15;
 
     public Mines() {
         setupField();
@@ -16,9 +16,11 @@ public class Mines {
 
 
     public void setupField() {
+        //Randomize a minefield
         while (quantity != 0) {
             randomRow = random.nextInt(9);
             randomCol = random.nextInt(9);
+            //Only place the mine when there's no mine in that position already, otherwise continue with new position
             if (!isMine(randomRow, randomCol)) {
                 placeMine();
                 quantity--;
@@ -40,7 +42,10 @@ public class Mines {
     }
 
 
-    // en gång
+
+    // sets up the solutionboard by updating each cell with the number of adjacent mines
+
+
     public void calculateAdjacentMines(GameBoard solutionBoard) {
 
         for (int i = 0; i < 9; i++) {
@@ -52,6 +57,7 @@ public class Mines {
         }
     }
 
+    // counting number of adjacent mines for each cell on the board
     public char countAdjacentMines(GameBoard solutionBoard, int row, int col) {
         int count = 0;
 
