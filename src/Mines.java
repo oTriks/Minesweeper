@@ -44,8 +44,6 @@ public class Mines {
 
 
     // sets up the solutionboard by updating each cell with the number of adjacent mines
-
-
     public void calculateAdjacentMines(GameBoard solutionBoard) {
 
         for (int i = 0; i < 9; i++) {
