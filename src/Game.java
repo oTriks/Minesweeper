@@ -40,7 +40,7 @@ public class Game {
         if (mines.getSolutionBoard().getCell(row, col) == Character.forDigit(0, 10)) {
             int[][] neighbors = {
                     {-1, -1}, {-1, 0}, {-1, 1},
-                    {0, -1},          {0, 1},
+                    {0, -1}, {0, 1},
                     {1, -1}, {1, 0}, {1, 1}
             };
             for (int[] neighbor : neighbors) {
@@ -80,6 +80,7 @@ public class Game {
             char rowNumber = input.charAt(0);
             row = Character.toUpperCase(rowNumber) - 65;
             col = Integer.parseInt(input.substring(1)) - 1;
+
             if (row < 0 || row >= 9 || col < 0 || col >= 9) {
                 System.out.println("Ogiltig inmatning. Ruta finns inte på brädet.");
                 return null;
@@ -106,13 +107,14 @@ public class Game {
             mines.showSolutionBoard();
             stop = System.currentTimeMillis();
             System.out.println("Game over! Du har träffat en mina! ");
-            System.out.println("Tid: " + (stop - start)/1000 + " s");
+            System.out.println("Tid: " + (stop - start) / 1000 + " s");
             askToPlayAgain();
+
         } else if (checkWin()) {
             mines.showSolutionBoard();
             stop = System.currentTimeMillis();
             System.out.println("Grattis! Du har vunnit spelet! ");
-            System.out.println("Tid: " + (stop - start)/1000 + " s");
+            System.out.println("Tid: " + (stop - start) / 1000 + " s");
             askToPlayAgain();
 
         } else {
@@ -130,7 +132,7 @@ public class Game {
             gameBoard = new GameBoard();
             System.out.println("Spelet har återställts. Lycka till!");
             makeMove();
-        } else if (playAgain.trim().equalsIgnoreCase("nej")){
+        } else if (playAgain.trim().equalsIgnoreCase("nej")) {
             System.out.println("Tack för att du spelade!");
             System.exit(0);
         } else {
