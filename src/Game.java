@@ -16,14 +16,18 @@ public class Game {
     // scans users input, starts game timer and calls methods to validate input and make the move on the board
     public void makeMove() {
         moves++;
+
         mines.showSolutionBoard();   // TODO ska tas bort, bara facit för felsökning
+
         System.out.println(gameBoard.getBoardLayout());
         System.out.println("Skriv in vilken ruta du vill öppna:");
         String input = sc.nextLine();
         if (moves == 1) {
             start = System.currentTimeMillis();
         }
+
         int[] result = isCellValidChoice(input);
+
 
         if (result != null) {
             int row = result[0];
@@ -145,12 +149,16 @@ public class Game {
 
 
     public void askToPlayAgain() {
-        System.out.print("Vill du spela igen? (ja/nej): ");
+      
+   
+          // If the user wants to play again, reset the game by creating new instances of GameBoard and Mines
+          System.out.print("Vill du spela igen? (ja/nej): ");
         String playAgain = sc.nextLine();
 
-        if (playAgain.trim().equalsIgnoreCase("ja")) {   //Trim for cleaning upp the input from spaces
+        if (playAgain.trim().equalsIgnoreCase("ja")) {  
             moves = 0;
             gameBoard = new GameBoard();
+            mines = new Mines();
             System.out.println("Spelet har återställts. Lycka till!");
             makeMove();
         } else if (playAgain.trim().equalsIgnoreCase("nej")) {
@@ -159,10 +167,9 @@ public class Game {
         } else {
             System.out.println("Ogiltig inmatning. Vänligen svara med ja/nej.");
             askToPlayAgain();
+
         }
     }
-
-
 }
 
 
