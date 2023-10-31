@@ -16,9 +16,11 @@ public class Mines {
 
 
     public void setupField() {
+        //Randomize a minefield
         while (quantity != 0) {
             randomRow = random.nextInt(9);
             randomCol = random.nextInt(9);
+            //Only place the mine when there's no mine in that position already, otherwise continue with new position
             if (!isMine(randomRow, randomCol)) {
                 placeMine();
                 quantity--;
@@ -39,8 +41,6 @@ public class Mines {
         solutionBoard.setCell(randomRow, randomCol, symbol);
     }
 
-
-    // en gång
     public void calculateAdjacentMines(GameBoard solutionBoard) {
 
         for (int i = 0; i < 9; i++) {
