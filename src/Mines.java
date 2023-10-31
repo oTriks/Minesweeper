@@ -6,8 +6,8 @@ public class Mines {
 
     int randomRow;
     int randomCol;
-    private char symbol = '☢';
-    private int quantity = 10;
+    private char symbol = '✸';
+    private int quantity = 15;
 
     public Mines() {
         setupField();
