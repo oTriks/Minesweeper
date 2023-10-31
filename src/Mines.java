@@ -40,7 +40,8 @@ public class Mines {
     }
 
 
-    // en gång
+    // sets up the solutionboard by updating each cell with the number of adjacent mines
+
     public void calculateAdjacentMines(GameBoard solutionBoard) {
 
         for (int i = 0; i < 9; i++) {
@@ -52,6 +53,7 @@ public class Mines {
         }
     }
 
+    // counting number of adjacent mines for each cell on the board
     public char countAdjacentMines(GameBoard solutionBoard, int row, int col) {
         int count = 0;
 
