@@ -21,19 +21,21 @@ public class Game {
     }
 
     public void makeMove() {
-        moves ++;
+        moves++;
         mines.showSolutionBoard();   // ska tas bort, bara facit för felsökning
         System.out.println(gameBoard.getBoardLayout());
         System.out.println("Skriv in vilken ruta du vill öppna:");
         String input = sc.nextLine();
-        if(moves == 1){start = System.currentTimeMillis();}
+        if (moves == 1) {
+            start = System.currentTimeMillis();
+        }
         int[] result = isValidChoice(input);
 
         if (result != null) {
             int row = result[0];
             int col = result[1];
             openCells(row, col);
-           checkGameStatus(row, col);
+            checkGameStatus(row, col);
 
         } //else {
         // makeMove();
@@ -122,23 +124,28 @@ public class Game {
     }
 
 
-
     public void askToPlayAgain() {
-        System.out.print("Vill du spela igen? (ja/nej): ");
-        Scanner scanner = new Scanner(System.in);
-        String playAgain = scanner.nextLine();
+        // Prompt the user to play again by asking for input (yes/no):
+        System.out.print("Do you want to play again? (yes/no): ");
 
-        if (playAgain.equalsIgnoreCase("ja")) {
+        // Create a scanner object to read the user's input
+        Scanner scanner = new Scanner(System.in);
+        String playAgain = scanner.nextLine(); // Read the user's response
+
+        // Check if the user's response
+        if (playAgain.equalsIgnoreCase("yes")) {
+            // If the user wants to play again, reset the game by creating new instances of GameBoard and Mines
             gameBoard = new GameBoard();
-            System.out.println("Spelet har återställts. Lycka till!");
-            makeMove(); // Börja om spelet
+            mines = new Mines();
+            // Display a message to inform the user that the game has been reset
+            System.out.println("The game has been reset. Good luck!");
+            makeMove(); // Start the game over
         } else {
-            System.out.println("Tack för att du spelade!");
-            System.exit(0); // Avsluta programmet om spelaren inte vill spela igen
+            // If the user doesn't want to play again, display a "Thank you for playing!" message
+            System.out.println("Thank you for playing!");
+            System.exit(0); // Exit the program if the player doesn't want to play again
         }
     }
-
-
 }
 
 
