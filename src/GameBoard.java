@@ -11,19 +11,21 @@ public class GameBoard {
         }
         updateBoardLayout();
     }
-    
 
-  public void updateBoardLayout() {
-    boardLayout = "\n            1    2    3    4    5    6    7    8    9\n";
-    boardLayout += "          ____ ____ ____ ____ ____ ____ ____ ____ ____ \n";
+
+    public void updateBoardLayout() {
+        boardLayout = "\n    " + Colours.colourNumber(11) + "        1     2     3     4     5     6     7     8     9 " + Colours.colourReset + "\n";
+        boardLayout += "          _____ _____ _____ _____ _____ _____ _____ _____ _____ \n";
         for (int i = 0; i < 9; i++) {
-        boardLayout += "       " + (char) ('A' + i) + " |";
-        for (int j = 0; j < 9; j++) {
-            boardLayout += "  " + board[i][j] + " |";
+            boardLayout += "       " + Colours.colourBoard + (char) ('A' + i) + Colours.colourReset + " |";
+            for (int j = 0; j < 9; j++) {
+                char numberValue = board[i][j];
+                String colourCode = Colours.colourMap.get(numberValue);
+                boardLayout += "  " + colourCode + "  |";
+            }
+            boardLayout += "\n         |_____|_____|_____|_____|_____|_____|_____|_____|_____| \n";
         }
-        boardLayout += "\n         |____|____|____|____|____|____|____|____|____|\n";
     }
-}
 
     public String getBoardLayout() {
         return boardLayout;
