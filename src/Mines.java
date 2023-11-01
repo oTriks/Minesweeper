@@ -78,7 +78,7 @@ public class Mines {
         return Character.forDigit(count, 10);
     }
 
-    public GameBoard getSolutionBoard() {  // används i game klassen för att kolla spelarens val mot lösningen
+    public GameBoard getSolutionBoard() {  
         return solutionBoard;
     }
 
